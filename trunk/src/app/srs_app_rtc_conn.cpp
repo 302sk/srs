@@ -2392,7 +2392,7 @@ srs_error_t SrsRtcConnection::send_rtcp(char *data, int nb_data)
         return err;
     }
 
-    return on_rtcp_cipher(cipher, size);
+    return on_rtcp_cipher(data, nb_data);
 }
 
 void SrsRtcConnection::check_send_nacks(SrsRtpNackForReceiver* nack, uint32_t ssrc, uint32_t& sent_nacks, uint32_t& timeout_nacks)
@@ -2596,7 +2596,7 @@ srs_error_t SrsRtcConnection::do_send_packet(SrsRtpPacket2* pkt)
     srs_info("RTC: SEND PT=%u, SSRC=%#x, SEQ=%u, Time=%u, %u/%u bytes", pkt->header.get_payload_type(), pkt->header.get_ssrc(),
         pkt->header.get_sequence(), pkt->header.get_timestamp(), pkt->nb_bytes(), iov->iov_len);
 
-    return on_rtp_cipher(iov->iov_base, iov->iov_len);
+    return on_rtp_cipher((char*)iov->iov_base, iov->iov_len);
 }
 
 void SrsRtcConnection::set_all_tracks_status(std::string stream_uri, bool is_publish, bool status)
