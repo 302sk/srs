@@ -1128,3 +1128,7 @@ srs_error_t SrsSRTP::unprotect_rtcp(void* packet, int* nb_plaintext)
     return err;
 }
 
+void SrsSRTP::dig_tunnel(SrsUdpMuxSocket* skt)
+{
+}
+
